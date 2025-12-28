@@ -1,0 +1,254 @@
+\documentclass[11pt,letterpaper,reqno]{amsart}
+\usepackage{tikz}
+\usetikzlibrary{positioning, shapes.geometric, arrows.meta, calc, positioning}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{bbm}
+\usepackage{enumitem} 
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18} 
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage{doi}
+\usepackage{float} 
+\addtolength{\hoffset}{-1.5cm}\addtolength{\textwidth}{3cm}
+\addtolength{\voffset}{-1cm}\addtolength{\textheight}{2cm}
+
+\usepackage{bookmark}
+\usepackage{hyperref}
+\hypersetup{pdfstartview={FitH}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\abs}[1]{| #1 |}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\tr}{\operatorname{Tr}}
+\DeclareMathOperator{\rank}{rank}
+
+
+
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{claim}{Claim}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{definition}[theorem]{Definition}
+\numberwithin{equation}{section}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\taufunc}{\tau}
+\newcommand{\omegap}{\omega}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\R}{\mathbb{R}}        % real numbers
+\newcommand{\E}{\mathbb{E}}        % expectation
+\newcommand{\Var}{\mathrm{Var}}    % variance
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\PP}{\mathbb{P}}     % probability
+\newcommand{\eps}{\varepsilon}     % epsilon
+\newcommand{\ind}{\mathbf{1}}      % indicator function
+\newcommand{\seq}[1]{\left(#1\right)} % sequence
+\newcommand{\lcm}{\operatorname{lcm}}
+\newcommand{\Pmax}{P^{+}} % largest prime factor
+\newcommand{\PsiSmooth}{\Psi} % smooth number counting function
+\makeatother
+
+
+\begin{document}
+
+\title{An improved lower bound on Erd\H{o}s Problem \#962}
+
+
+
+\author[Quanyu Tang]{Quanyu Tang}
+\address{School of Mathematics and Statistics, Xi'an Jiaotong University, Xi'an 710049, P. R. China}
+\email{tang\_quanyu@163.com}
+
+
+% \subjclass[2020]{xxx}
+
+% \keywords{xxx}
+
+% \begin{abstract}
+
+% \end{abstract}
+
+
+
+\maketitle
+
+
+
+
+
+
+
+
+
+\section{Introduction}
+
+In \cite[p.~96]{Er65}, Erd\H{o}s proposed the following problem, which also appears as Problem~\#962 on Bloom’s Erd\H{o}s Problems website~\cite{EP962}.
+
+\begin{problem}
+Let $k(n)$ be the maximal integer $k$ such that there exists $m\leq n$ such that each of the integers\[m+1,\ldots,m+k\]are divisible by at least one prime $>k$. Estimate $k(n)$.
+\end{problem}
+
+Erd\H{o}s~\cite{Er65} wrote it is 'not hard to prove' that\[k(n)\gg_\epsilon \exp\left((\log n)^{1/2-\epsilon}\right)\]and it 'seems likely' that $k(n)=o(n^\epsilon)$, but had no non-trivial upper bound for $k(n)$.
+
+It is not clear what he meant by a non-trivial bound for this problem, but Tao in the comments section of~\cite{EP962} has given a simple argument proving $k(n) \leq (1+o(1))n^{1/2}$.
+
+
+In this short note we prove a new lower bound for $k(n)$.
+
+\begin{theorem}
+As $n\to\infty$, we have
+\[
+k(n) \ge \exp \Big(\big(\tfrac1{\sqrt2}-o(1)\big)\sqrt{\log n\,\log\log n}\Big).
+\]
+\end{theorem}
+
+
+\section{Main result}
+
+\begin{theorem}\label{thm:kn-lower}
+For every fixed constant $c$ with $0<c<1/\sqrt{2}$ there exists
+$n_0(c)$ such that for all integers $n\ge n_0(c)$,
+\[
+k(n)\ \ge\ \left\lfloor \exp\!\big(c\sqrt{\log n\,\log\log n}\big)\right\rfloor.
+\]
+\end{theorem}
+
+\begin{proof}
+For an integer $t\ge 1$, let $\Pmax(t)$ denote the largest prime divisor of $t$
+(with the convention $\Pmax(1)=1$). For real numbers $x\ge 1$ and $y\ge 2$, define
+\[
+\PsiSmooth(x,y)\ :=\ \#\{\,t\le x:\ \Pmax(t)\le y\,\},
+\]
+the counting function of $y$--smooth integers up to $x$.
+
+\medskip\noindent
+\textbf{1. A pigeonhole lemma:}
+Fix an integer $y\ge 2$ and set $Q:=\lfloor n/y\rfloor$. Partition the interval
+$\{1,2,\dots,Qy\}$ into $Q$ disjoint blocks of length $y$:
+\[
+B_j:=\{jy+1,\dots,(j+1)y\}\qquad (j=0,1,\dots,Q-1).
+\]
+If every block $B_j$ contains at least one $y$--smooth integer, then
+$\PsiSmooth(n,y)\ge Q$. Hence, if $\PsiSmooth(n,y)<Q$, there exists some $j$
+such that $B_j$ contains no $y$--smooth integer, i.e.\ $\Pmax(t)>y$ for all
+$t\in B_j$. Taking $m:=jy$, we have $m\le Qy\le n$ and
+\[
+\Pmax(m+i)>y \qquad (1\le i\le y).
+\]
+In particular, each $m+i$ is divisible by a prime $>y$.
+
+Thus, to prove the theorem it suffices to find $y$ with $\PsiSmooth(n,y)<\lfloor n/y\rfloor$.
+
+\medskip\noindent
+\textbf{2. Choosing $y$ and estimating $\PsiSmooth(n,y)$:}
+Fix $c\in(0,1/\sqrt2)$ and set
+\[
+y:=\left\lfloor \exp\!\big(c\sqrt{\log n\,\log\log n}\big)\right\rfloor,
+\qquad
+u:=\frac{\log n}{\log y}.
+\]
+Then $y\to\infty$ and $u\to\infty$ as $n\to\infty$, and moreover
+$\log y \sim c\sqrt{\log n\,\log\log n}$, hence
+\[
+u=\frac{\log n}{\log y}
+=\frac{1}{c}\sqrt{\frac{\log n}{\log\log n}}\,(1+o(1)),
+\qquad
+\log u=\frac12\log\log n+O(\log\log\log n),
+\]
+so
+\begin{equation}\label{eq:uloguasymp}
+u\log u
+=\Big(\tfrac{1}{2c}+o(1)\Big)\sqrt{\log n\,\log\log n}.
+\end{equation}
+
+A classical estimate of de Bruijn, with Hildebrand's extension of the uniformity
+range, gives
+\begin{equation}\label{eq:Psi-rho}
+\PsiSmooth(n,y)=n\,\rho(u)\Big(1+O \Big(\frac{\log(u+1)}{\log y}\Big)\Big),
+\end{equation}holds for $y > \exp \left( (\log\log n)^{5/3 + \varepsilon} \right)$, where $\rho(u)$ is the Dickman--de Bruijn function; see \cite[(1.8)--(1.10)]{Granville2008}.
+In our choice of parameters, $\log(u+1)/\log y\to 0$, so
+\[
+\PsiSmooth(n,y)=n\,\rho(u)\,(1+o(1)).
+\]
+Moreover, $\rho(u)$ decays as
+\begin{equation}\label{eq:rho-asymp}
+\rho(u)=u^{-u+o(u)}=\exp\big(-(1+o(1))u\log u\big)
+\qquad (u\to\infty),
+\end{equation}
+see \cite[(1.6)]{Granville2008}.
+Combining \eqref{eq:uloguasymp} and \eqref{eq:rho-asymp} yields
+\[
+\PsiSmooth(n,y)
+\le n\exp\!\Big(-\Big(\tfrac{1}{2c}+o(1)\Big)\sqrt{\log n\,\log\log n}\Big).
+\]
+
+\medskip\noindent
+\textbf{3. Comparison with $n/y$:}
+Since $\log y = c\sqrt{\log n\,\log\log n}+O(1)$, we have
+\[
+\frac{n}{y}
+= n\exp\!\big(-c\sqrt{\log n\,\log\log n}+O(1)\big).
+\]
+Because $c<1/\sqrt2$, we have $\frac{1}{2c}-c>0$; choose a constant
+$\delta>0$ with $\delta<\frac{1}{2c}-c$. Then for all sufficiently large $n$,
+the previous bounds imply
+\[
+\PsiSmooth(n,y)\ \le\ \frac{n}{y}\,\exp\!\big(-\delta\sqrt{\log n\,\log\log n}\big)
+\ <\ \frac{1}{2}\cdot\frac{n}{y}
+\ \le\ \left\lfloor\frac{n}{y}\right\rfloor.
+\]
+Therefore $\PsiSmooth(n,y)<\lfloor n/y\rfloor$, and by Step~1 there exists
+$m\le n$ such that each of $m+1,\dots,m+y$ has largest prime factor $>y$, hence
+is divisible by a prime $>y$. This shows $k(n)\ge y$.
+\end{proof}
+
+
+
+\begin{thebibliography}{99}
+
+
+\bibitem{EP962}
+T. F. Bloom, Erd\H{o}s Problem \#962, \url{https://www.erdosproblems.com/962}, accessed 2025-12-28.
+
+
+
+\bibitem{Er65}
+Erd\H{o}s, P., Extremal problems in number theory. \emph{Proc. Sympos. Pure Math.}, Vol. VIII (1965), 181--189.
+
+
+
+
+\bibitem{Granville2008}
+A.~Granville, \emph{Smooth numbers: computational number theory and beyond}, in \emph{Algorithmic Number Theory: Lattices, Number Fields, Curves and Cryptography}
+(MSRI Publications, Vol.~44), J.~P. Buhler and P.~Stevenhagen (eds.), Cambridge University Press, 2008, pp.~267--324. \texttt{doi:10.1017/9781139049801.010}.
+
+\end{thebibliography}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
